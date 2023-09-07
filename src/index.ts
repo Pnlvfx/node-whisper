@@ -63,7 +63,7 @@ function whisper<T extends OutputFormat>(audio: string, options?: WhisperOptions
 
 export default whisper;
 
-// //TEST
-const audio = path.join('media', 'audio.mp3');
-const data = await whisper(audio, { fp16: true });
-console.log(await data.srt.getContent());
+// // //TEST
+// const audio = path.join('media', 'audio.mp3');
+// const data = await whisper(audio, { fp16: true });
+// console.log(await data.srt.getContent());
