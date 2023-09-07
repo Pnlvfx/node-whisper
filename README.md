@@ -16,7 +16,7 @@ Make sure you've got your foundation set by following the instructions laid out 
 
     Typescript Support: Enjoy the benefits of static typing and enhanced code readability when working with node-whisper in TypeScript with both esm and cjs modules.
 
-    No dependencies
+    No dependencies.
 
 ## Installation
 
