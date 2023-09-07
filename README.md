@@ -38,9 +38,9 @@ async function transcribeAudio() {
   try {
     const audioFilePath = "path_to_your_audio_file.wav";
     const data = await whisper(audioFilePath);
-    console.log("Transcriptions:", data); // all the files paths
+    console.log("Transcriptions:", data); // all the selected files paths (default: json, tsv, srt, txt, vtt)
     const content = await data.json.getContent();
-    console.log(content); // the content
+    console.log(content); // the content of the file
   } catch (error) {
     console.error("Error:", error.message);
   }

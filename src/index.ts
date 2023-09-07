@@ -8,14 +8,14 @@ import { getParams } from './params.js';
 
 type WhisperOptions<T extends OutputFormat> = AudioToTextOptions & { output_format?: T };
 
-// Function overload for when output_format is not provided
-function whisper(audio: string): Promise<AudioToTextFiles>;
-
 // Function overload for when output_format is provided
 function whisper<T extends OutputFormat>(
   audio: string,
   options: WhisperOptions<T>,
 ): Promise<T extends 'all' ? AudioToTextFiles : { [K in T]: Proto }>;
+
+// Function overload for when output_format is not provided
+function whisper(audio: string): Promise<AudioToTextFiles>;
 
 function whisper<T extends OutputFormat>(audio: string, options?: WhisperOptions<T>): Promise<AudioToTextFiles | { [K in T]: Proto }> {
   return new Promise((resolve, reject) => {
