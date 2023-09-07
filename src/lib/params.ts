@@ -6,7 +6,7 @@ export const getParams = (options?: AudioToTextOptions) => {
     for (const [k, value] of Object.entries(options)) {
       const key = k as keyof AudioToTextOptions;
       if (value === undefined) continue;
-      if (typeof key === 'boolean') {
+      if (typeof value === 'boolean') {
         const val = value ? 'True' : 'False';
         params.push(`--${key}`, val);
       } else {

@@ -49,7 +49,7 @@ function whisper<T extends OutputFormat>(audio: string, options?: WhisperOptions
     });
 
     whisper.on('close', async (code) => {
-      if (code === 1) return reject(error.toString());
+      if (code === null || code > 0) return reject(`Whisper error: ${error.toString()}, CODE: ${code}`);
       const folder = options?.output_dir || '.';
       const name = path.basename(audio).replace(path.extname(audio), '');
       if (!options?.output_format || options.output_format === 'all') {
