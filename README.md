@@ -6,7 +6,7 @@ node-whisper is a powerful and straightforward TypeScript package that provides 
 
 ## Before You Begin:
 
-Make sure you've got your foundation set by following the instructions laid out in the OpenAI Whisper repository. Once you've completed those steps, you're ready to dive in.
+Make sure you've got your foundation set by following the instructions laid out in the [OpenAI Whisper repository](https://github.com/openai/whisper). Once you've completed those steps, you're ready to dive in.
 
 ## Features
 
