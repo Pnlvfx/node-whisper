@@ -1,4 +1,4 @@
-import { AudioToTextOptions } from './types/options.js';
+import { AudioToTextOptions } from '../types/options.js';
 
 export const getParams = (options?: AudioToTextOptions) => {
   const params = [];

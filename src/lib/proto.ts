@@ -1,5 +1,5 @@
-import { OutputFormat } from './types/options.js';
-import { Proto } from './types/output.js';
+import { OutputFormat } from '../types/options.js';
+import { Proto } from '../types/output.js';
 import { promises as fs } from 'node:fs';
 
 export const getProto = (key: OutputFormat, value: string): Proto => {
