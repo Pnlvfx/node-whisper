@@ -1,7 +1,7 @@
 {
   "name": "node-whisper",
   "description": "Node interaction with Open AI whisper.",
-  "version": "2023.8.29",
+  "version": "2023.9.7",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
@@ -33,6 +33,17 @@
     "dist",
     "LICENSE",
     "README.md"
+  ],
+  "keywords": [
+    "OpenAI",
+    "Whisper",
+    "Transcript",
+    "Audio",
+    "Speech",
+    "Speech-to-Text",
+    "STT",
+    "TTS",
+    "SRT"
   ],
   "devDependencies": {
     "@types/node": "^20.5.9",
