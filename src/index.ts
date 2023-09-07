@@ -2,9 +2,10 @@
 import { spawn } from 'node:child_process';
 import { AudioToTextOptions, OutputFormat } from './types/options.js';
 import path from 'node:path';
-import { AudioToTextFiles, Proto } from './types/output.js';
+import { AudioToText, AudioToTextFiles, Proto } from './types/output.js';
 import { getProto } from './lib/proto.js';
 import { getParams } from './lib/params.js';
+import { promises as fs } from 'node:fs';
 
 type WhisperOptions<T extends OutputFormat | undefined> = AudioToTextOptions & { output_format?: T };
 
@@ -73,6 +74,15 @@ function whisper<T extends OutputFormat>(audio: string, options?: WhisperOptions
     });
   });
 }
+
+whisper.readAllFiles = async (input: AudioToTextFiles) => {
+  const output: Partial<AudioToText> = {};
+  for (const [key, value] of Object.entries(input)) {
+    const content = await fs.readFile(value.file);
+    output[key as keyof AudioToTextFiles] = key === 'json' ? JSON.parse(content.toString()) : content.toString();
+  }
+  return output as AudioToText;
+};
 
 export default whisper;
 
