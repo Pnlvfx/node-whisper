@@ -1,14 +1,24 @@
+/* eslint-disable no-unused-vars */
 import { spawn } from 'node:child_process';
 import { AudioToTextOptions, OutputFormat } from './types/options.js';
 import path from 'node:path';
 import { AudioToTextFiles, Proto } from './types/output.js';
-import { promises as fs } from 'node:fs';
-//READ TODO ON THE OUTPUT.TS FILE
+import { getProto } from './proto.js';
+import { getParams } from './params.js';
 
 type WhisperOptions<T extends OutputFormat> = AudioToTextOptions & { output_format?: T };
 
-const whisper = <T extends OutputFormat>(audio: string, options?: WhisperOptions<T>) => {
-  return new Promise<T extends undefined ? AudioToTextFiles : T extends 'all' ? AudioToTextFiles : { [K in T]: Proto }>((resolve, reject) => {
+// Function overload for when output_format is not provided
+function whisper(audio: string): Promise<AudioToTextFiles>;
+
+// Function overload for when output_format is provided
+function whisper<T extends OutputFormat>(
+  audio: string,
+  options: WhisperOptions<T>,
+): Promise<T extends 'all' ? AudioToTextFiles : { [K in T]: Proto }>;
+
+function whisper<T extends OutputFormat>(audio: string, options?: WhisperOptions<T>): Promise<AudioToTextFiles | { [K in T]: Proto }> {
+  return new Promise((resolve, reject) => {
     const params = getParams(options);
     params.unshift(audio);
     if (options?.verbose) {
@@ -38,8 +48,7 @@ const whisper = <T extends OutputFormat>(audio: string, options?: WhisperOptions
       if (code === 1) return reject(error.toString());
       const folder = options?.output_dir || '.';
       const name = path.basename(audio).replace(path.extname(audio), '');
-      const outFormat = options?.output_format || 'all';
-      if (outFormat === 'all') {
+      if (!options?.output_format || options.output_format === 'all') {
         const json = `${folder}/${name}.json`;
         const tsv = `${folder}/${name}.tsv`;
         const srt = `${folder}/${name}.srt`;
@@ -53,45 +62,18 @@ const whisper = <T extends OutputFormat>(audio: string, options?: WhisperOptions
           txt: getProto('txt', txt),
         });
       } else {
-        const custom = `${folder}/${name}/${outFormat}`;
+        const custom = `${folder}/${name}.${options.output_format}`;
         resolve({
-          [outFormat]: custom,
-        });
+          [options.output_format]: getProto(options.output_format, custom),
+        } as unknown as { [K in T]: Proto });
       }
     });
   });
-};
-
-const getProto = (key: OutputFormat, value: string): Proto => {
-  return {
-    file: value,
-    getContent: async () => {
-      const content = await fs.readFile(value);
-      if (key === 'json') return JSON.parse(content.toString());
-      return content.toString();
-    },
-  };
-};
-
-const getParams = (options?: AudioToTextOptions) => {
-  const params = [];
-  if (options) {
-    for (const [k, value] of Object.entries(options)) {
-      const key = k as keyof AudioToTextOptions;
-      if (value === undefined) continue;
-      if (typeof key === 'boolean') {
-        const val = value ? 'True' : 'False';
-        params.push(`--${key}`, val);
-      } else {
-        params.push(`--${key}`, value);
-      }
-    }
-  }
-  return params;
-};
+}
 
 export default whisper;
 
-const audio = path.join('media', 'audio.mp3');
-const data = await whisper(audio, { output_format: 'json' });
-console.log(await data.json.getContent());
+//TEST
+// const audio = path.join('media', 'audio.mp3');
+// const data = await whisper(audio, { output_format: 'srt' });
+// console.log(await data.srt.getContent());

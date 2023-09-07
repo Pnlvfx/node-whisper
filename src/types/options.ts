@@ -2,7 +2,7 @@ import { Language } from './language.js';
 
 export type Model = 'tiny.en' | 'tiny' | 'base.en' | 'base' | 'small.en' | 'small' | 'medium.en' | 'medium' | 'large-v1' | 'large-v2' | 'large';
 
-export type OutputFormat = 'txt' | 'vtt' | 'srt' | 'tsv' | 'json';
+export type OutputFormat = 'txt' | 'vtt' | 'srt' | 'tsv' | 'json' | 'all';
 
 export interface AudioToTextOptions {
   /** Name of the Whisper model to use (default: small) */
@@ -13,8 +13,6 @@ export interface AudioToTextOptions {
   device?: string;
   /** Directory to save the outputs (default: .) */
   output_dir?: string;
-  /** Format of the output file; if not specified, all available formats will be produced (default: all) */
-  output_format?: OutputFormat;
   /** Whether to print out the progress and debug messages (default: True) */
   verbose?: boolean;
   /** Whether to perform X->X speech recognition ('transcribe') or X->English translation ('translate') (default: transcribe) */

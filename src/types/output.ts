@@ -6,10 +6,11 @@ export interface Proto {
   getContent: () => Promise<string>;
 }
 
-export type AudioToTextFiles = {
-  // todo: implement a way to recognize which format is available on the output and remove undefined
+type AudioToTextFilesrr = {
   [format in OutputFormat]: Proto;
 };
+
+export type AudioToTextFiles = Omit<AudioToTextFilesrr, 'all'>;
 
 export interface AudioToText extends Omit<AudioToTextFiles, 'json'> {
   json: AudioToTextJSON;
