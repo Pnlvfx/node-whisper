@@ -6,7 +6,7 @@ import { AudioToTextFiles, Proto } from './types/output.js';
 import { getProto } from './proto.js';
 import { getParams } from './params.js';
 
-type WhisperOptions<T extends OutputFormat> = AudioToTextOptions & { output_format?: T };
+export type WhisperOptions<T extends OutputFormat> = AudioToTextOptions & { output_format?: T };
 
 // Function overload for when output_format is provided
 function whisper<T extends OutputFormat>(

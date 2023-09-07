@@ -6,7 +6,7 @@ export interface Proto {
   getContent: () => Promise<string>;
 }
 
-type AudioToTextFilesrr = {
+export type AudioToTextFilesrr = {
   [format in OutputFormat]: Proto;
 };
 
@@ -21,7 +21,7 @@ export interface AudioToTextJSON {
   segments: Segment[];
 }
 
-interface Segment {
+export interface Segment {
   id: number;
   seek: number;
   start: number;
