@@ -24,8 +24,11 @@ To add node-whisper to your project, simply run:
 
 ```bash
 npm install node-whisper
+```
 
-#or with yarn
+# Or with yarn
+
+```bash
 yarn add node-whisper
 ```
 
