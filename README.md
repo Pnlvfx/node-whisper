@@ -8,7 +8,7 @@ node-whisper is a powerful and straightforward TypeScript package that provides 
 
 Make sure you've got your foundation set by following the instructions laid out in the [OpenAI Whisper repository](https://github.com/openai/whisper). Once you've completed those steps, you're ready to dive in.
 
-## Installation
+## Installation
 
 To add node-whisper to your project, simply run:
 
@@ -16,7 +16,7 @@ To add node-whisper to your project, simply run:
 npm install node-whisper
 ```
 
-# Or with yarn
+Or with yarn
 
 ```bash
 yarn add node-whisper
