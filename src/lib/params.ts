@@ -1,14 +1,13 @@
 import { AudioToTextOptions } from '../types/options.js';
 
 export const getParams = (options?: AudioToTextOptions) => {
-  const params = [];
+  const params: string[] = [];
   if (options) {
     for (const [k, value] of Object.entries(options)) {
       const key = k as keyof AudioToTextOptions;
       if (value === undefined) continue;
       if (typeof value === 'boolean') {
-        const val = value ? 'True' : 'False';
-        params.push(`--${key}`, val);
+        params.push(`--${key}`, value ? 'True' : 'False');
       } else {
         params.push(`--${key}`, value);
       }

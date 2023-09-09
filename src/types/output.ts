@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { OutputFormat } from './options.js';
 
 export interface Proto {
@@ -7,6 +6,7 @@ export interface Proto {
 }
 
 export type AudioToTextFilesrr = {
+  // eslint-disable-next-line no-unused-vars
   [format in OutputFormat]: Proto;
 };
 

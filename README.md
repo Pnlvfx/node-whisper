@@ -8,16 +8,6 @@ node-whisper is a powerful and straightforward TypeScript package that provides 
 
 Make sure you've got your foundation set by following the instructions laid out in the [OpenAI Whisper repository](https://github.com/openai/whisper). Once you've completed those steps, you're ready to dive in.
 
-## Features
-
-    Async Support: Embrace the asynchronous nature of modern JavaScript and take full advantage of async/await when interacting with Whisper.
-
-    Comprehensive Options: All of Whisper's configuration options are supported, giving you fine-grained control over your Speech-to-Text tasks.
-
-    Typescript Support: Enjoy the benefits of static typing and enhanced code readability when working with node-whisper in TypeScript with both esm and cjs modules.
-
-    No dependencies.
-
 ## Installation
 
 To add node-whisper to your project, simply run:
@@ -54,5 +44,15 @@ async function transcribeAudio() {
 
 transcribeAudio();
 ```
+
+## Features
+
+Async Support: Embrace the asynchronous nature of modern JavaScript and take full advantage of async/await when interacting with Whisper.
+
+Comprehensive Options: All of Whisper's configuration options are supported, giving you fine-grained control over your Speech-to-Text tasks.
+
+Typescript Support: Enjoy the benefits of static typing and enhanced code readability when working with node-whisper in TypeScript with both esm and cjs modules.
+
+No dependencies.
 
 Happy coding!

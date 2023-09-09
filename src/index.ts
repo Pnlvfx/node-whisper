@@ -23,8 +23,7 @@ function whisper(audio: string): Promise<AudioToTextFiles>;
 
 function whisper<T extends OutputFormat>(audio: string, options?: WhisperOptions<T>): Promise<AudioToTextFiles | { [K in T]: Proto }> {
   return new Promise((resolve, reject) => {
-    const params = getParams(options);
-    params.unshift(audio);
+    const params = [audio, ...getParams(options)];
     if (options?.verbose) {
       console.log('command:', params);
     }
@@ -69,7 +68,7 @@ function whisper<T extends OutputFormat>(audio: string, options?: WhisperOptions
         const custom = `${folder}/${name}.${options.output_format}`;
         resolve({
           [options.output_format]: getProto(options.output_format, custom),
-        } as unknown as { [K in T]: Proto });
+        } as { [K in T]: Proto });
       }
     });
   });
@@ -85,8 +84,3 @@ whisper.readAllFiles = async (input: AudioToTextFiles) => {
 };
 
 export default whisper;
-
-// // //TEST
-// const audio = path.join('media', 'audio.mp3');
-// const data = await whisper(audio, { fp16: true });
-// console.log(await data.srt.getContent());
