@@ -76,9 +76,10 @@ function whisper<T extends OutputFormat>(audio: string, options?: WhisperOptions
 
 whisper.readAllFiles = async (input: AudioToTextFiles) => {
   const output: Partial<AudioToText> = {};
-  for (const [key, value] of Object.entries(input)) {
+  for (const [k, value] of Object.entries(input)) {
+    const key = k as keyof AudioToTextFiles;
     const content = await fs.readFile(value.file);
-    output[key as keyof AudioToTextFiles] = key === 'json' ? JSON.parse(content.toString()) : content.toString();
+    output[key] = key === 'json' ? JSON.parse(content.toString()) : content.toString();
   }
   return output as AudioToText;
 };
