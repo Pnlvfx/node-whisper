@@ -30,7 +30,10 @@ import whisper from "node-whisper";
 async function transcribeAudio() {
   try {
     const audioFilePath = "path_to_your_audio_file.wav";
-    const data = await whisper(audioFilePath);
+    const data = await whisper(audioFilePath, {
+      output_format: "all",
+      output_dir: "subtitles",
+    });
     console.log("Transcriptions:", data); // all the selected files paths (default: json, tsv, srt, txt, vtt)
     const content = await data.json.getContent();
     console.log(content); // the content of the file
