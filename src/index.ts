@@ -7,7 +7,7 @@ import { getProto } from './lib/proto.js';
 import { getParams } from './lib/params.js';
 import { promises as fs } from 'node:fs';
 
-type WhisperOptions<T extends OutputFormat | undefined> = AudioToTextOptions & { output_format?: T };
+export type WhisperOptions<T extends OutputFormat | undefined> = AudioToTextOptions & { output_format?: T };
 
 // Function overload for when there are options, but the output_format
 function whisper<T extends undefined>(audio: string, options: WhisperOptions<T>): Promise<AudioToTextFiles>;
