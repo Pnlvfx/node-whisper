@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { spawn } from 'node:child_process';
 import { AudioToTextOptions, OutputFormat } from './types/options.js';
 import path from 'node:path';

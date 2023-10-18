@@ -25,23 +25,23 @@ yarn add node-whisper
 ## Getting Started
 
 ```js
-import whisper from "node-whisper";
+import whisper from 'node-whisper';
 
 async function transcribeAudio() {
   try {
-    const audioFilePath = "path_to_your_audio_file.wav";
+    const audioFilePath = 'path_to_your_audio_file.wav';
     const data = await whisper(audioFilePath, {
-      output_format: "all",
-      output_dir: "subtitles",
+      output_format: 'all',
+      output_dir: 'subtitles',
     });
-    console.log("Transcriptions:", data); // all the selected files paths (default: json, tsv, srt, txt, vtt)
-    const content = await data.json.getContent();
-    console.log(content); // the content of the file
+    console.log('Transcriptions:', data); // all the selected files paths (default: json, tsv, srt, txt, vtt)
+    const JSONcontent = await data.json.getContent();
+    console.log(JSONcontent); // the content of the file
     // or if you provide all output_format and you want to read them all at once
     const contents = await whisper.readAllFiles(data);
     console.log(contents); // all the returned files parsed
   } catch (error) {
-    console.error("Error:", error.message);
+    console.error('Error:', error.message);
   }
 }
 
