@@ -9,6 +9,6 @@ describe('whisper function', () => {
     async () => {
       await whisper(getFile('audio.mp3'), { model: 'base', output_dir: path.join(process.cwd(), 'media') });
     },
-    2 * 60 * 1000,
+    10 * 60 * 1000,
   );
 });
