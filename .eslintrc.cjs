@@ -53,8 +53,9 @@ module.exports = {
     'no-multiple-empty-lines': 'error',
     'no-unsafe-negation': 'error',
     'prefer-const': 'error',
-    'no-unused-vars': 'off',
+    'no-console': 'error',
 
+    'no-unused-vars': 'off',
     'unicorn/prevent-abbreviations': 'off',
     'unicorn/catch-error-name': 'off',
     'import/no-unresolved': 'off',
