@@ -1,4 +1,4 @@
-import { Language } from './language.js';
+import type { Language } from './language.js';
 
 export type Model = 'tiny.en' | 'tiny' | 'base.en' | 'base' | 'small.en' | 'small' | 'medium.en' | 'medium' | 'large-v1' | 'large-v2' | 'large';
 

@@ -14,7 +14,7 @@ function whisper<T extends OutputFormat>(
   options: WhisperOptions<T>,
 ): Promise<T extends 'all' ? AudioToTextFiles : { [K in T]: Proto }>;
 
-// Function overload for when there are options, but the output_format
+// Function overload for when there are options, but the output_format is not provided
 function whisper<T extends undefined>(audio: string, options: WhisperOptions<T>): Promise<AudioToTextFiles>;
 
 // Function overload for when options are not provided
@@ -79,8 +79,8 @@ whisper.readAllFiles = async (input: AudioToTextFiles) => {
   const output: Partial<AudioToText> = {};
   for (const [k, value] of Object.entries(input)) {
     const key = k as keyof AudioToTextFiles;
-    const content = await fs.readFile(value.file);
-    output[key] = key === 'json' ? JSON.parse(content.toString()) : content.toString();
+    const content = await fs.readFile(value.file, { encoding: 'utf8' });
+    output[key] = key === 'json' ? JSON.parse(content) : content;
   }
   return output as AudioToText;
 };
