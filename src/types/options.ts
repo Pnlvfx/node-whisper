@@ -57,6 +57,8 @@ export interface AudioToTextOptions {
   max_line_width?: number;
   /** (Requires --word_timestamps True) The maximum number of lines in a segment (default: None) */
   max_line_count?: number;
+  /** The maximum number of characters per line */
+  max_words_per_line?: number;
   /** Number of threads used by torch for CPU inference; supercedes MKL_NUM_THREADS/OMP_NUM_THREADS (default: 0) */
   threads?: number;
 }
