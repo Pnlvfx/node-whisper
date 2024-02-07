@@ -1,6 +1,18 @@
 import type { Language } from './language.js';
 
-export type Model = 'tiny.en' | 'tiny' | 'base.en' | 'base' | 'small.en' | 'small' | 'medium.en' | 'medium' | 'large-v1' | 'large-v2' | 'large';
+export type Model =
+  | 'tiny.en'
+  | 'tiny'
+  | 'base.en'
+  | 'base'
+  | 'small.en'
+  | 'small'
+  | 'medium.en'
+  | 'medium'
+  | 'large'
+  | 'large-v1'
+  | 'large-v2'
+  | 'large-v3';
 
 export type OutputFormat = 'txt' | 'vtt' | 'srt' | 'tsv' | 'json' | 'all';
 
