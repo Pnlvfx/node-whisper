@@ -1,7 +1,7 @@
 {
   "name": "node-whisper",
   "description": "A binding for OpenAI's Whisper Speech-to-Text system, supporting async operations.",
-  "version": "2024.2.7",
+  "version": "2024.2.8",
   "author": {
     "email": "simonegauli@gmail.com",
     "name": "Simone Gauli"
