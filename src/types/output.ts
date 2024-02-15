@@ -1,23 +1,20 @@
 import type { OutputFormat } from './options.js';
 
-export interface Proto {
+export interface Proto<K> {
   file: string;
-  getContent: () => Promise<string>;
+  getContent: () => Promise<'json' extends K ? AudioToTextJSON : string>;
 }
 
 export type AudioToTextFilesrr = {
-  [format in OutputFormat]: Proto;
+  [format in OutputFormat]: Proto<format>;
 };
 
 export type AudioToTextFiles = Omit<AudioToTextFilesrr, 'all'>;
 
-export interface AudioToText extends Omit<AudioToTextFiles, 'json'> {
-  json: AudioToTextJSON;
-}
-
 export interface AudioToTextJSON {
   text: string;
   segments: Segment[];
+  language: string;
 }
 
 export interface Segment {

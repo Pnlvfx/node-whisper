@@ -15,12 +15,12 @@ function whisper<T extends undefined>(audio: string, options: WhisperOptions<T>)
 function whisper<T extends OutputFormat>(
   audio: string,
   options: WhisperOptions<T>,
-): Promise<T extends 'all' ? AudioToTextFiles : { [K in T]: Proto }>;
+): Promise<T extends 'all' ? AudioToTextFiles : { [K in T]: Proto<K> }>;
 
 // Function overload for when options are not provided
 function whisper(audio: string): Promise<AudioToTextFiles>;
 
-function whisper<T extends OutputFormat>(audio: string, options?: WhisperOptions<T>): Promise<AudioToTextFiles | { [K in T]: Proto }> {
+function whisper<T extends OutputFormat>(audio: string, options?: WhisperOptions<T>): Promise<AudioToTextFiles | { [K in T]: Proto<K> }> {
   return new Promise((resolve, reject) => {
     const params = [audio, ...getParams(options)];
     if (options?.verbose) {
@@ -69,7 +69,7 @@ function whisper<T extends OutputFormat>(audio: string, options?: WhisperOptions
         const custom = `${folder}/${name}.${options.output_format}`;
         resolve({
           [options.output_format]: getProto(options.output_format, custom),
-        } as { [K in T]: Proto });
+        } as unknown as { [K in T]: Proto<K> });
       }
     });
   });
