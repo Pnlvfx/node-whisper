@@ -1,5 +1,5 @@
 import type { AudioToTextOptions, OutputFormat } from './types/options.js';
-import type { AudioToText, AudioToTextFiles, Proto } from './types/output.js';
+import type { AudioToTextFiles, AudioToTextJSON, Proto } from './types/output.js';
 import { spawn } from 'node:child_process';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
@@ -75,14 +75,20 @@ function whisper<T extends OutputFormat>(audio: string, options?: WhisperOptions
   });
 }
 
+type DefaultOutputFormat = 'txt' | 'vtt' | 'srt' | 'tsv';
+
+type ReadedAudio = {
+  [format in DefaultOutputFormat]: string;
+};
+
 whisper.readAllFiles = async (input: AudioToTextFiles) => {
-  const output: Partial<AudioToText> = {};
+  const output: Partial<ReadedAudio & { json?: AudioToTextJSON }> = {};
   for (const [k, value] of Object.entries(input)) {
     const key = k as keyof AudioToTextFiles;
     const content = await fs.readFile(value.file, { encoding: 'utf8' });
     output[key] = key === 'json' ? JSON.parse(content) : content;
   }
-  return output as AudioToText;
+  return output as ReadedAudio & { json: AudioToTextJSON };
 };
 
 export default whisper;
