@@ -92,3 +92,5 @@ whisper.readAllFiles = async (input: AudioToTextFiles) => {
 };
 
 export default whisper;
+
+export type { Language } from './types/language.js';
