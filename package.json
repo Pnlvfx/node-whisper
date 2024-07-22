@@ -9,9 +9,6 @@
   "main": "./dist/esm/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
-  "engines": {
-    "node": ">=18.x"
-  },
   "exports": {
     ".": {
       "types": "./dist/esm/index.d.ts",
@@ -22,6 +19,9 @@
       "import": "./*",
       "require": "./*"
     }
+  },
+  "engines": {
+    "node": ">=18.x"
   },
   "type": "module",
   "license": "MIT",
