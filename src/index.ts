@@ -29,9 +29,11 @@ function whisper<T extends OutputFormat>(audio: string, options?: WhisperOptions
     }
     const whisper = spawn('whisper', params);
 
-    whisper.on('error', (error) => reject(error));
+    whisper.on('error', (error) => {
+      reject(error);
+    });
 
-    whisper.stdout.on('data', (data) => {
+    whisper.stdout.on('data', (data: Buffer) => {
       if (options?.verbose) {
         // eslint-disable-next-line no-console
         console.log('stdout:', data.toString());
@@ -40,17 +42,20 @@ function whisper<T extends OutputFormat>(audio: string, options?: WhisperOptions
 
     let error = '';
 
-    whisper.stderr.on('data', (data) => {
+    whisper.stderr.on('data', (data: Buffer) => {
       if (options?.verbose) {
         // eslint-disable-next-line no-console
         console.log('stderr:', data.toString());
       }
-      error += data;
+      error += data.toString();
     });
 
     whisper.on('close', (code) => {
-      if (code === null || code > 0) return reject(`Whisper error: ${error.toString()}, CODE: ${code}`);
-      const folder = options?.output_dir || '.';
+      if (code === null || code > 0) {
+        reject(new Error(`Whisper error: ${error.toString()}, CODE: ${code?.toString() ?? ''}`));
+        return;
+      }
+      const folder = options?.output_dir ?? '.';
       const name = path.basename(audio).replace(path.extname(audio), '');
       if (!options?.output_format || options.output_format === 'all') {
         const json = `${folder}/${name}.json`;
@@ -86,6 +91,7 @@ whisper.readAllFiles = async (input: AudioToTextFiles) => {
   for (const [k, value] of Object.entries(input)) {
     const key = k as keyof AudioToTextFiles;
     const content = await fs.readFile(value.file, { encoding: 'utf8' });
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     output[key] = key === 'json' ? JSON.parse(content) : content;
   }
   return output as ReadedAudio & { json: AudioToTextJSON };

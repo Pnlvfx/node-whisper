@@ -7,6 +7,7 @@ export const getProto = <K extends OutputFormat>(key: K, value: string): Proto<K
     file: value,
     getContent: async () => {
       const content = await fs.readFile(value, { encoding: 'utf8' });
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       if (key === 'json') return JSON.parse(content);
       return content;
     },
