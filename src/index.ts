@@ -29,9 +29,7 @@ function whisper<T extends OutputFormat>(audio: string, options?: WhisperOptions
     }
     const whisper = spawn('whisper', params);
 
-    whisper.on('error', (error) => {
-      reject(error);
-    });
+    whisper.on('error', reject);
 
     whisper.stdout.on('data', (data: Buffer) => {
       if (options?.verbose) {
