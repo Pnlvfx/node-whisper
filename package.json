@@ -1,7 +1,7 @@
 {
   "name": "node-whisper",
   "description": "A binding for OpenAI's Whisper Speech-to-Text system, supporting async operations.",
-  "version": "2024.2.15",
+  "version": "2024.7.30",
   "author": {
     "email": "simonegauli@gmail.com",
     "name": "Simone Gauli"
@@ -56,19 +56,19 @@
     "README.md"
   ],
   "devDependencies": {
-    "@eslint/js": "^9.7.0",
+    "@eslint/js": "^9.8.0",
     "@types/eslint__js": "^8.42.3",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.14.11",
-    "eslint": "^9.7.0",
-    "eslint-plugin-sonarjs": "^1.0.3",
-    "eslint-plugin-unicorn": "^54.0.0",
+    "@types/node": "^22.0.0",
+    "eslint": "^9.8.0",
+    "eslint-plugin-sonarjs": "^1.0.4",
+    "eslint-plugin-unicorn": "^55.0.0",
     "jest": "^29.7.0",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
     "ts-jest": "^29.2.3",
     "tsx": "^4.16.2",
-    "typescript": "^5.5.3",
-    "typescript-eslint": "^8.0.0-alpha.49"
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^8.0.0-alpha.59"
   }
 }
