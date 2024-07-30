@@ -1,5 +1,5 @@
 {
-  "include": ["src", "eslint.config.js", "jest.config.js"],
+  "include": ["src", "eslint.config.js", "jest.config.cjs"],
   "exclude": ["node_modules", "__tests__", "tools", "coverage"],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */

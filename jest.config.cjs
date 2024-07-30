@@ -1,5 +1,5 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
-// eslint-disable-next-line unicorn/prefer-module, no-undef
+// eslint-disable-next-line no-undef
 module.exports = {
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
