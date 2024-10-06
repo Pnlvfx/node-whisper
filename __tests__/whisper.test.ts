@@ -1,6 +1,7 @@
+/* eslint-disable no-console */
 import { describe, it } from '@jest/globals';
 import path from 'node:path';
-import whisper from '../src/index';
+import whisper from '../src/whisper.js';
 
 describe('whisper function', () => {
   it(

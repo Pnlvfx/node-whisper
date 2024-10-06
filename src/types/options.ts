@@ -1,6 +1,6 @@
 import type { Language } from './language.js';
 
-export type Model =
+export type WhisperModel =
   | 'tiny.en'
   | 'tiny'
   | 'base.en'
@@ -18,7 +18,7 @@ export type OutputFormat = 'txt' | 'vtt' | 'srt' | 'tsv' | 'json' | 'all';
 
 export interface AudioToTextOptions {
   /** Name of the Whisper model to use (default: small) */
-  model?: Model;
+  model?: WhisperModel;
   /** The path to save model files; uses ~/.cache/whisper by default (default: None) */
   model_dir?: string;
   /** Device to use for PyTorch inference (default: cuda) */

@@ -1,33 +1,36 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+// @ts-check
+
 import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import eslintPluginUnicorn from 'eslint-plugin-unicorn';
-import sonarjs from 'eslint-plugin-sonarjs';
 import globals from 'globals';
+import sonarjs from 'eslint-plugin-sonarjs';
+import tseslint from 'typescript-eslint';
+import unicorn from 'eslint-plugin-unicorn';
 
 export default tseslint.config(
   {
-    ignores: ['dist', '__tests__', 'tools', 'coverage'],
+    ignores: ['dist', 'coverage'],
   },
   eslint.configs.recommended,
-  eslintPluginUnicorn.configs['flat/recommended'],
+  unicorn.configs['flat/all'],
   sonarjs.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
   {
     languageOptions: {
+      globals: globals.builtin,
       parserOptions: {
-        project: true,
+        projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
-      globals: globals.builtin,
     },
   },
   {
     rules: {
+      indent: ['error', 2, { SwitchCase: 1 }],
       'no-var': 'error',
       semi: 'error',
-      indent: ['error', 2, { SwitchCase: 1 }],
       'no-multi-spaces': 'error',
       'no-empty-function': 'error',
       'no-floating-decimal': 'error',
@@ -51,12 +54,21 @@ export default tseslint.config(
 
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
+      'sonarjs/sonar-no-unused-vars': 'off',
       'unicorn/prevent-abbreviations': 'off',
       'unicorn/catch-error-name': 'off',
+
+      // duplicates of tseslint
+      'sonarjs/no-misused-promises': 'off',
+      'sonarjs/sonar-prefer-optional-chain': 'off',
+
+      // enable back when sonar fix it
+      'sonarjs/sonar-no-fallthrough': 'off',
+      'sonarjs/pluginRules-of-hooks': 'off',
     },
   },
   {
-    files: ['**/*.js', '**/*.cjs'],
+    files: ['src/**/*.js'],
     ...tseslint.configs.disableTypeChecked,
   },
 );

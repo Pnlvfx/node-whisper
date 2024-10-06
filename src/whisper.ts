@@ -27,6 +27,7 @@ function whisper<T extends OutputFormat>(audio: string, options?: WhisperOptions
       // eslint-disable-next-line no-console
       console.log('command:', params);
     }
+    // eslint-disable-next-line sonarjs/no-os-command-from-path
     const whisper = spawn('whisper', params);
 
     whisper.on('error', reject);
@@ -98,3 +99,4 @@ whisper.readAllFiles = async (input: AudioToTextFiles) => {
 export default whisper;
 
 export type { Language } from './types/language.js';
+export type { WhisperModel } from './types/options.js';
