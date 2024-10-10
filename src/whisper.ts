@@ -6,6 +6,7 @@ import path from 'node:path';
 import { getProto } from './lib/proto.js';
 import { getParams } from './lib/params.js';
 import { getEntries } from 'coraline';
+import { isValidLanguage, languages } from './types/language.js';
 
 export type WhisperOptions<T extends AllOutputFormats | undefined> = AudioToTextOptions & { output_format?: T };
 
@@ -93,6 +94,8 @@ whisper.readAllFiles = async (input: AudioToTextFiles) => {
   }
   return output as ReadedAudio & { json: AudioToTextJSON };
 };
+whisper.languages = languages;
+whisper.isValidLanguage = isValidLanguage;
 
 export default whisper;
 
