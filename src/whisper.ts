@@ -85,6 +85,8 @@ type ReadedAudio = {
   [format in StringOutputFormat]: string;
 };
 
+whisper.languages = languages;
+whisper.isValidLanguage = isValidLanguage;
 whisper.readAllFiles = async (input: AudioToTextFiles) => {
   const output: Partial<ReadedAudio & { json?: AudioToTextJSON }> = {};
   for (const [key, value] of getEntries(input)) {
@@ -94,8 +96,6 @@ whisper.readAllFiles = async (input: AudioToTextFiles) => {
   }
   return output as ReadedAudio & { json: AudioToTextJSON };
 };
-whisper.languages = languages;
-whisper.isValidLanguage = isValidLanguage;
 
 export default whisper;
 
