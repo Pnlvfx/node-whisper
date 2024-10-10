@@ -14,7 +14,11 @@ export type WhisperModel =
   | 'large-v2'
   | 'large-v3';
 
-export type OutputFormat = 'txt' | 'vtt' | 'srt' | 'tsv' | 'json' | 'all';
+export type StringOutputFormat = 'txt' | 'vtt' | 'srt' | 'tsv';
+
+export type OutputFormat = StringOutputFormat | 'json';
+
+export type AllOutputFormats = OutputFormat | 'all';
 
 export interface AudioToTextOptions {
   /** Name of the Whisper model to use (default: small) */

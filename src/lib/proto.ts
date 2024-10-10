@@ -1,8 +1,8 @@
-import type { OutputFormat } from '../types/options.js';
+import type { AllOutputFormats } from '../types/options.js';
 import type { Proto } from '../types/output.js';
-import { promises as fs } from 'node:fs';
+import fs from 'node:fs/promises';
 
-export const getProto = <K extends OutputFormat>(key: K, value: string): Proto<K> => {
+export const getProto = <K extends AllOutputFormats>(key: K, value: string): Proto<K> => {
   return {
     file: value,
     getContent: async () => {

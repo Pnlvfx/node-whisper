@@ -1,18 +1,19 @@
-import type { AudioToTextOptions, OutputFormat } from './types/options.js';
+import type { AudioToTextOptions, AllOutputFormats, StringOutputFormat } from './types/options.js';
 import type { AudioToTextFiles, AudioToTextJSON, Proto } from './types/output.js';
 import { spawn } from 'node:child_process';
-import { promises as fs } from 'node:fs';
+import fs from 'node:fs/promises';
 import path from 'node:path';
 import { getProto } from './lib/proto.js';
 import { getParams } from './lib/params.js';
+import { getEntries } from 'coraline';
 
-export type WhisperOptions<T extends OutputFormat | undefined> = AudioToTextOptions & { output_format?: T };
+export type WhisperOptions<T extends AllOutputFormats | undefined> = AudioToTextOptions & { output_format?: T };
 
 // Function overload for when there are options, but the output_format is not provided
 function whisper<T extends undefined>(audio: string, options: WhisperOptions<T>): Promise<AudioToTextFiles>;
 
 // Function overload for when output_format is provided
-function whisper<T extends OutputFormat>(
+function whisper<T extends AllOutputFormats>(
   audio: string,
   options: WhisperOptions<T>,
 ): Promise<T extends 'all' ? AudioToTextFiles : { [K in T]: Proto<K> }>;
@@ -20,7 +21,7 @@ function whisper<T extends OutputFormat>(
 // Function overload for when options are not provided
 function whisper(audio: string): Promise<AudioToTextFiles>;
 
-function whisper<T extends OutputFormat>(audio: string, options?: WhisperOptions<T>): Promise<AudioToTextFiles | { [K in T]: Proto<K> }> {
+function whisper<T extends AllOutputFormats>(audio: string, options?: WhisperOptions<T>): Promise<AudioToTextFiles | { [K in T]: Proto<K> }> {
   return new Promise((resolve, reject) => {
     const params = [audio, ...getParams(options)];
     if (options?.verbose) {
@@ -79,16 +80,13 @@ function whisper<T extends OutputFormat>(audio: string, options?: WhisperOptions
   });
 }
 
-type DefaultOutputFormat = 'txt' | 'vtt' | 'srt' | 'tsv';
-
 type ReadedAudio = {
-  [format in DefaultOutputFormat]: string;
+  [format in StringOutputFormat]: string;
 };
 
 whisper.readAllFiles = async (input: AudioToTextFiles) => {
   const output: Partial<ReadedAudio & { json?: AudioToTextJSON }> = {};
-  for (const [k, value] of Object.entries(input)) {
-    const key = k as keyof AudioToTextFiles;
+  for (const [key, value] of getEntries(input)) {
     const content = await fs.readFile(value.file, { encoding: 'utf8' });
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     output[key] = key === 'json' ? JSON.parse(content) : content;

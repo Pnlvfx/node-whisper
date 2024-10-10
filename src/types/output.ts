@@ -5,11 +5,9 @@ export interface Proto<K> {
   getContent: () => Promise<'json' extends K ? AudioToTextJSON : string>;
 }
 
-type AudioToTextFilesrr = {
+export type AudioToTextFiles = {
   [format in OutputFormat]: Proto<format>;
 };
-
-export type AudioToTextFiles = Omit<AudioToTextFilesrr, 'all'>;
 
 export interface AudioToTextJSON {
   text: string;
