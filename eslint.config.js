@@ -61,10 +61,6 @@ export default tseslint.config(
       // duplicates of tseslint
       'sonarjs/no-misused-promises': 'off',
       'sonarjs/sonar-prefer-optional-chain': 'off',
-
-      // enable back when sonar fix it
-      'sonarjs/sonar-no-fallthrough': 'off',
-      'sonarjs/pluginRules-of-hooks': 'off',
     },
   },
   {
