@@ -12,7 +12,8 @@ export type WhisperModel =
   | 'large'
   | 'large-v1'
   | 'large-v2'
-  | 'large-v3';
+  | 'large-v3'
+  | 'turbo';
 
 export type StringOutputFormat = 'txt' | 'vtt' | 'srt' | 'tsv';
 
