@@ -5,7 +5,6 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { getProto } from './lib/proto.js';
 import { getParams } from './lib/params.js';
-import { getEntries } from 'coraline';
 import { isValidLanguage, languages } from './types/language.js';
 
 export type WhisperOptions<T extends AllOutputFormats | undefined> = AudioToTextOptions & { output_format?: T };
@@ -52,6 +51,10 @@ function whisper<T extends AllOutputFormats>(audio: string, options?: WhisperOpt
     });
 
     whisper.on('close', (code) => {
+      if (options?.verbose) {
+        // eslint-disable-next-line no-console
+        console.log('Whisper process exit with code:', code);
+      }
       if (code === null || code > 0) {
         reject(new Error(`Whisper error: ${error.toString()}, CODE: ${code?.toString() ?? ''}`));
         return;
@@ -89,7 +92,8 @@ whisper.languages = languages;
 whisper.isValidLanguage = isValidLanguage;
 whisper.readAllFiles = async (input: AudioToTextFiles) => {
   const output: Partial<ReadedAudio & { json?: AudioToTextJSON }> = {};
-  for (const [key, value] of getEntries(input)) {
+  for (const [k, value] of Object.entries(input)) {
+    const key = k as keyof typeof input;
     const content = await fs.readFile(value.file, { encoding: 'utf8' });
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     output[key] = key === 'json' ? JSON.parse(content) : content;
