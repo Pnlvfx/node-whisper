@@ -1,1 +1,1 @@
-{"text": " Ciao", "segments": [{"id": 0, "seek": 0, "start": 0.0, "end": 2.0, "text": " Ciao", "tokens": [50364, 28473, 50464], "temperature": 0.0, "avg_logprob": -0.40479281544685364, "compression_ratio": 0.3333333333333333, "no_speech_prob": 0.0062769497744739056}], "language": "it"}
+{"text": " Ciao", "segments": [{"id": 0, "seek": 0, "start": 0.0, "end": 2.0, "text": " Ciao", "tokens": [50364, 28473, 50464], "temperature": 0.0, "avg_logprob": -0.40556636452674866, "compression_ratio": 0.3333333333333333, "no_speech_prob": 0.006271026562899351}], "language": "it"}

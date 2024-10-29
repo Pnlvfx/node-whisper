@@ -21,10 +21,10 @@ function whisper<T extends AllOutputFormats>(
 // Function overload for when options are not provided
 function whisper(audio: string): Promise<AudioToTextFiles>;
 
-function whisper<T extends AllOutputFormats>(audio: string, options?: WhisperOptions<T>): Promise<AudioToTextFiles | { [K in T]: Proto<K> }> {
+function whisper<T extends AllOutputFormats>(audio: string, options: WhisperOptions<T> = {}): Promise<AudioToTextFiles | { [K in T]: Proto<K> }> {
   return new Promise((resolve, reject) => {
     const params = [audio, ...getParams(options)];
-    if (options?.verbose) {
+    if (options.verbose) {
       // eslint-disable-next-line no-console
       console.log('command:', params);
     }
@@ -34,7 +34,7 @@ function whisper<T extends AllOutputFormats>(audio: string, options?: WhisperOpt
     whisper.on('error', reject);
 
     whisper.stdout.on('data', (data: Buffer) => {
-      if (options?.verbose) {
+      if (options.verbose) {
         // eslint-disable-next-line no-console
         console.log('stdout:', data.toString());
       }
@@ -43,7 +43,7 @@ function whisper<T extends AllOutputFormats>(audio: string, options?: WhisperOpt
     let error = '';
 
     whisper.stderr.on('data', (data: Buffer) => {
-      if (options?.verbose) {
+      if (options.verbose) {
         // eslint-disable-next-line no-console
         console.log('stderr:', data.toString());
       }
@@ -51,7 +51,7 @@ function whisper<T extends AllOutputFormats>(audio: string, options?: WhisperOpt
     });
 
     whisper.on('close', (code) => {
-      if (options?.verbose) {
+      if (options.verbose) {
         // eslint-disable-next-line no-console
         console.log('Whisper process exit with code:', code);
       }
@@ -59,9 +59,9 @@ function whisper<T extends AllOutputFormats>(audio: string, options?: WhisperOpt
         reject(new Error(`Whisper error: ${error.toString()}, CODE: ${code?.toString() ?? ''}`));
         return;
       }
-      const folder = options?.output_dir ?? '.';
+      const folder = options.output_dir ?? '.';
       const name = path.basename(audio).replace(path.extname(audio), '');
-      if (!options?.output_format || options.output_format === 'all') {
+      if (!options.output_format || options.output_format === 'all') {
         const json = `${folder}/${name}.json`;
         const tsv = `${folder}/${name}.tsv`;
         const srt = `${folder}/${name}.srt`;
