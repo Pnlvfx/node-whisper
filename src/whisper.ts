@@ -84,9 +84,7 @@ function whisper<T extends AllOutputFormats>(audio: string, options?: WhisperOpt
   });
 }
 
-type ReadedAudio = {
-  [format in StringOutputFormat]: string;
-};
+type ReadedAudio = Record<StringOutputFormat, string>;
 
 whisper.languages = languages;
 whisper.isValidLanguage = isValidLanguage;
