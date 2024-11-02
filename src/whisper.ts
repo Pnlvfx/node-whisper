@@ -5,9 +5,9 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { getProto } from './lib/proto.js';
 import { getParams } from './lib/params.js';
-import { isValidLanguage, languages } from './types/language.js';
+import { languages } from './types/language.js';
 
-export type WhisperOptions<T extends AllOutputFormats | undefined> = AudioToTextOptions & { output_format?: T };
+type WhisperOptions<T extends AllOutputFormats | undefined> = AudioToTextOptions & { output_format?: T };
 
 // Function overload for when there are options, but the output_format is not provided
 function whisper<T extends undefined>(audio: string, options: WhisperOptions<T>): Promise<AudioToTextFiles>;
@@ -87,7 +87,6 @@ function whisper<T extends AllOutputFormats>(audio: string, options: WhisperOpti
 type ReadedAudio = Record<StringOutputFormat, string>;
 
 whisper.languages = languages;
-whisper.isValidLanguage = isValidLanguage;
 whisper.readAllFiles = async (input: AudioToTextFiles) => {
   const output: Partial<ReadedAudio & { json?: AudioToTextJSON }> = {};
   for (const [k, value] of Object.entries(input)) {

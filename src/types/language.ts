@@ -211,7 +211,3 @@ export const languages = [
 ] as const;
 
 export type Language = (typeof languages)[number];
-
-export const isValidLanguage = (str: string): str is Language => {
-  return languages.includes(str as Language);
-};
