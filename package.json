@@ -46,7 +46,7 @@
     "build:esm": "tsc -p tsconfig.build.json",
     "build:cjs": "tsc -p tsconfig.build.json --module CommonJS --moduleResolution Node --outDir dist/cjs",
     "prepack": "npm run build",
-    "prepare": "husky && npm run build",
+    "prepare": "npm run build",
     "prepublishOnly": "npm run test && eslint"
   },
   "files": [
@@ -58,7 +58,7 @@
     "@eslint/js": "^9.14.0",
     "@types/eslint__js": "^8.42.3",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.8.6",
+    "@types/node": "^22.9.0",
     "coraline": "github:Pnlvfx/coraline",
     "eslint": "^9.14.0",
     "eslint-plugin-sonarjs": "^2.0.4",
@@ -71,6 +71,6 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.19.2",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^8.12.2"
+    "typescript-eslint": "^8.14.0"
   }
 }
