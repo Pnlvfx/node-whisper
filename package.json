@@ -1,7 +1,7 @@
 {
   "name": "node-whisper",
   "description": "A binding for OpenAI's Whisper Speech-to-Text system, supporting async operations.",
-  "version": "2024.11.13",
+  "version": "2026.03.01",
   "author": {
     "email": "simonegauli@gmail.com",
     "name": "Simone Gauli"
@@ -12,12 +12,6 @@
   },
   "license": "MIT",
   "type": "module",
-  "main": "./dist/esm/whisper.js",
-  "module": "./dist/esm/whisper.js",
-  "types": "./dist/esm/whisper.d.ts",
-  "engines": {
-    "node": ">=18.x"
-  },
   "keywords": [
     "OpenAI",
     "Whisper",
@@ -32,22 +26,21 @@
     "Subtitles"
   ],
   "exports": {
-    "types": "./dist/esm/whisper.d.ts",
-    "import": "./dist/esm/whisper.js",
-    "require": "./dist/cjs/whisper.js"
+    ".": {
+      "types": "./dist/whisper.d.ts",
+      "import": "./dist/whisper.js"
+    }
   },
   "scripts": {
-    "tsc": "tsc --noEmit true",
-    "generate:package.json": "tsx ./tools/generate-commonjs-package-json.ts dist/cjs/package.json",
-    "unused": "tsx ./tools/unused.ts",
-    "test": "rimraf coverage && jest --coverage",
+    "tsc": "tsc --noEmit",
+    "unused": "node tools/unused.ts",
     "lint": "eslint",
-    "build": "rimraf dist && eslint && npm run build:esm && npm run build:cjs && npm run generate:package.json",
-    "build:esm": "tsc -p tsconfig.build.json",
-    "build:cjs": "tsc -p tsconfig.build.json --module CommonJS --moduleResolution Node --outDir dist/cjs",
-    "prepack": "npm run build",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm run test && eslint"
+    "build": "rimraf dist && eslint && tsc -p tsconfig.build.json",
+    "prepack": "yarn build",
+    "prepublishOnly": "yarn test && eslint",
+    "update": "yarn upgrade-interactive",
+    "reference": "node tools/reference.ts",
+    "test": "rimraf coverage && jest --coverage"
   },
   "files": [
     "dist",
@@ -55,22 +48,22 @@
     "README.md"
   ],
   "devDependencies": {
-    "@eslint/js": "^9.14.0",
-    "@types/eslint__js": "^8.42.3",
+    "@goatjs/dbz": "^1.51.0",
+    "@goatjs/node": "^1.71.0",
+    "@goatjs/node-eslint": "^1.45.0",
+    "@goatjs/rimraf": "^1.71.0",
+    "@goatjs/ts-unused-exports": "1.71.0",
+    "@goatjs/typescript-config": "1.71.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.9.0",
-    "coraline": "github:Pnlvfx/coraline",
     "eslint": "^9.14.0",
-    "eslint-plugin-sonarjs": "^2.0.4",
-    "eslint-plugin-unicorn": "^56.0.0",
     "husky": "^9.1.6",
     "jest": "^29.7.0",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
-    "tsx": "^4.19.2",
-    "typescript": "^5.6.3",
-    "typescript-eslint": "^8.14.0"
-  }
+    "typescript": "^5.6.3"
+  },
+  "packageManager": "yarn@4.12.0+sha512.f45ab632439a67f8bc759bf32ead036a1f413287b9042726b7cc4818b7b49e14e9423ba49b18f9e06ea4941c1ad062385b1d8760a8d5091a1a31e5f6219afca8"
 }

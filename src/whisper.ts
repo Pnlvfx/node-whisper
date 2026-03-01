@@ -56,7 +56,7 @@ function whisper<T extends AllOutputFormats>(audio: string, options: WhisperOpti
         console.log('Whisper process exit with code:', code);
       }
       if (code === null || code > 0) {
-        reject(new Error(`Whisper error: ${error.toString()}, CODE: ${code?.toString() ?? ''}`));
+        reject(new Error(`Whisper error: ${error}, CODE: ${code?.toString() ?? ''}`));
         return;
       }
       const folder = options.output_dir ?? '.';
