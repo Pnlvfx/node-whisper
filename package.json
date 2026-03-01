@@ -40,7 +40,7 @@
     "prepublishOnly": "yarn test && eslint",
     "update": "yarn upgrade-interactive",
     "reference": "node tools/reference.ts",
-    "test": ""
+    "test": "rimraf coverage && jest --coverage"
   },
   "files": [
     "dist",
