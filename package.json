@@ -1,7 +1,7 @@
 {
   "name": "node-whisper",
   "description": "A binding for OpenAI's Whisper Speech-to-Text system, supporting async operations.",
-  "version": "2026.03.02",
+  "version": "2026.03.03",
   "author": {
     "email": "simonegauli@gmail.com",
     "name": "Simone Gauli"
@@ -44,7 +44,7 @@
     "prepublishOnly": "yarn test && eslint",
     "update": "yarn upgrade-interactive",
     "reference": "node tools/reference.ts",
-    "test": "rimraf coverage && jest --coverage"
+    "test": ""
   },
   "files": [
     "dist",

@@ -12,7 +12,6 @@ const jestConfig: JestConfigWithTsJest = {
       'ts-jest',
       {
         useESM: true,
-        isolatedModules: true,
       },
     ],
   },
