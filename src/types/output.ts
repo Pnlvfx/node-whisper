@@ -15,7 +15,7 @@ export interface AudioToTextJSON {
   language: string;
 }
 
-interface Segment {
+export interface Segment {
   id: number;
   seek: number;
   start: number;

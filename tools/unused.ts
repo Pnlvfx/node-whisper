@@ -1,10 +1,13 @@
 import { findUnusedExports } from '@goatjs/ts-unused-exports';
+import { prettier } from '@goatjs/node/prettier';
 
 const unused = await findUnusedExports({
-  ignoreFiles: ['whisper.ts', 'eslint.config.js', 'jest.config.ts'],
-  ignoreVars: [],
+  ignoreFiles: ['eslint.config.js', 'jest.config.ts'],
+  ignoreVars: ['WhisperModel', 'Segment'],
 });
 
 if (unused) {
-  throw new Error(`The following exports are unused, add them on the ignore or remove the exports to continue.\n${JSON.stringify(unused)}`);
+  throw new Error(
+    `The following exports are unused, add them on the ignore or remove the exports to continue.\n${await prettier.format(JSON.stringify(unused), { parser: 'json' })}`,
+  );
 }
